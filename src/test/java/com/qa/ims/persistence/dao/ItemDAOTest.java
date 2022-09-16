@@ -23,45 +23,71 @@ public class ItemDAOTest {
 	
 	@Test
 	public void testCreate() {
-		final Item testItem = new Item(2l, "Testing", 543.21, 5l);
+		long first = dao.readAll().get(0).getId();
+		int intfirst = (int) first;
+		long LPlusOne = new Integer(intfirst + 1);
+		int IPlusOne = new Integer(intfirst + 1);
+		final Item testItem = new Item(LPlusOne, "Testing", 543.21, 5l);
 		assertEquals(testItem, dao.create(testItem));
+		System.out.println(dao.delete(intfirst));
+		System.out.println(dao.delete(IPlusOne));
+		
 	}
 	
 	@Test
 	public void testReadAll() {
 		List<Item> testItems = new ArrayList<>();
-		testItems.add(new Item(1L, "testItem", 123.45, 6l));
+		long first = dao.readAll().get(0).getId();
+		int intfirst = (int) first;
+		testItems.add(new Item(first, "testItem", 123.45, 6l));
 		assertEquals(testItems, dao.readAll());
+		System.out.println(dao.delete(intfirst));
 	}
 	
 	@Test
 	public void testReadLatest() {
-		assertEquals(new Item(1l, "testItem", 123.45, 6l), dao.readLatest());
+		long first = dao.readAll().get(0).getId();
+		int intfirst = (int) first;
+		assertEquals(new Item(first, "testItem", 123.45, 6l), dao.readLatest());
+		System.out.println(dao.readAll());
+		System.out.println(dao.delete(intfirst));
+		System.out.println(dao.readAll());
 	}
 	
 	@Test
 	public void testRead() {
-		final long ID = 1L;
-		assertEquals(new Item(ID, "testItem", 123.45, 9l), dao.read(ID));
+		long first = dao.readAll().get(0).getId();
+		int intfirst = (int) first;
+		final long ID = first;
+		assertEquals(new Item(ID, "testItem", 123.45, 6l), dao.read(ID));
+		System.out.println(dao.delete(intfirst));
 	}
 
 	@Test
 	public void testUpdate() {
-		final Item updatedItem = new Item(1L, "testItem", 123.45, 8l);
+		long first = dao.readAll().get(0).getId();
+		int intfirst = (int) first;
+		final long ID = first;
+		final Item updatedItem = new Item(ID, "testItem", 123.45, 8l);
 		assertEquals(updatedItem, dao.update(updatedItem));
-
+		dao.update(updatedItem);
+		System.out.println(dao.delete(intfirst));
 	}
 	
 	@Test
 	public void testUpdateInvalidItem() {
+		long first = dao.readAll().get(0).getId();
+		int intfirst = (int) first;
 		final Item updatedItem = new Item(4000L, "testItem", 50.0, 123l);
 		assertEquals(null, dao.update(updatedItem));
-
+		System.out.println(dao.delete(intfirst));
 	}
 
 	@Test
 	public void testDelete() {
-		assertEquals(1, dao.delete(1));
+		long first = dao.readAll().get(0).getId();
+		int intfirst = (int) first;
+		assertEquals(1, dao.delete(intfirst));
 	}
-	
+
 }

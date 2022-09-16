@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS `items`;
 DROP TABLE IF EXISTS `orders`;
 DROP TABLE IF EXISTS `order_line_items`;
 
+
 CREATE TABLE IF NOT EXISTS `customers` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `first_name` VARCHAR(40) DEFAULT NULL,
@@ -14,11 +15,14 @@ CREATE TABLE IF NOT EXISTS `customers` (
 
 CREATE TABLE IF NOT EXISTS `items` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(40) NOT NULL,
+    `name` VARCHAR(40) NOT NULL UNIQUE,
     `price` DECIMAL(7, 2) DEFAULT 0.00,
     `stock` INT DEFAULT 0,
     PRIMARY KEY (`id`)
+    
 );
+
+ALTER TABLE `items` AUTO_INCREMENT = 1;
 
 CREATE TABLE IF NOT EXISTS `orders` (
 	`id` INT NOT NULL AUTO_INCREMENT,
