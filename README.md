@@ -1,4 +1,4 @@
-Coverage: 34%
+Coverage: 60%
 # CLI Inventory Management System
 
  The CLI Inventory Management System (IMS) is used as a friendly interface for personal and enterpise applications in managing customers, their orders and the logistics of those orders. The functionality of the system allows users to create, read, update, and delete (CRUD) customers, orders and associated items. 
