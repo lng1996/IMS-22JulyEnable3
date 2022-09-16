@@ -13,7 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 Jira was used for project planning and time management. The Jira site can be accessed [here](https://leogornovskiy.atlassian.net/jira/software/projects/IMS/boards/3) and a sample is shown ![below:](Jira.png)
 
-The project was completed in one sprint with user stories describing the functionality of individual issues in the backlog.
+The project was completed in two sprints with user stories describing the functionality of individual issues in the backlog. The issues also employed story points and MoSCoW methodology to order and prioritise tasks.
 
 ### Database Schema
 
@@ -101,40 +101,41 @@ As CRUD fucntionality is similar between the entities, it is demonstrated for Cu
 - Update - Prompts user to enter customer ID then asks for new name and surname to be updated in the database. 
 - Delete  - Prompts user to enter a customer ID and then deletes the customer from the database. 
 
+An example of the application running is shown here:
 
+![AppRun](AppRun.png)
+
+### Packaging the IMS to run via CLI.
+
+The IMS can be packaged into a *.jar* file to be easily executable from the command line as shown hence:   
 
 
 
 ## Running the tests
 
-Explain how to run the automated tests for this system. Break down into which tests and what they do
+Tests need to be run to ensure the IMS functions as intended and to give an opportunity for any unanticipated bugs to be ironed out. The tests are run each of the objects in the IMS, which include: **Customer, Item, Order, CustomerDAO, ItemDAO, OrderDAO, CustomerController, ItemController and OrderController.**
 
 ### Unit Tests 
 
-Explain what these tests test, why and how to run them
+Unit tests are run using tools like JUnit for the evaulation of isolated module functioning. This means it tests the smallest pieces of code such as methods independent of any dependencies. 
 
-```
-Give an example
-```
 
 ### Integration Tests 
-Explain what these tests test, why and how to run them
+After unit testing is complete, integration testing is run to evaluate how a system works as a whole and to see if any issues emerge from the interaction of co-dependent code. This is especially important when an application is written programmers who may emply varying coding methods. 
 
-```
-Give an example
-```
+An example of a test being successfully run is shown hence: 
 
-### And coding style tests
+![Test](Test.png)
 
-Explain what these tests test and why
+### Other Forms of Testing
 
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+Other tests can be performed on systems, which include:
+- Functional tests
+- Acceptance tests
+- End-to-End 
+- Smoke testing
+- Performance testing 
+- Functional tests
 
 ## Built With
 
@@ -142,7 +143,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Versioning
 
-We use [GitHub](http://github.com/) for versioning.
+[GitHub](http://github.com/) was used for versioning.
 
 ## Authors
 
@@ -158,5 +159,4 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * QA Academy and Trainers (Jordan Benbelaid, Anoush Lowton, Christopher Yiangou)
-# IMS-Start
-# IMS-Start
+
