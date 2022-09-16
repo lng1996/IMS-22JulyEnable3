@@ -6,7 +6,13 @@ import org.apache.logging.log4j.Logger;
 import com.qa.ims.controller.Action;
 import com.qa.ims.controller.CrudController;
 import com.qa.ims.controller.CustomerController;
+import com.qa.ims.controller.ItemController;
+import com.qa.ims.controller.OrderAction;
+import com.qa.ims.controller.OrderController;
 import com.qa.ims.persistence.dao.CustomerDAO;
+import com.qa.ims.persistence.dao.ItemDAO;
+import com.qa.ims.persistence.dao.OrderDAO;
+import com.qa.ims.persistence.dao.OrderLineItemDAO;
 import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.utils.DBUtils;
 import com.qa.ims.utils.Utils;
@@ -16,12 +22,19 @@ public class IMS {
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	private final CustomerController customers;
+	private final ItemController items;
+	private final OrderController orders;
 	private final Utils utils;
 
 	public IMS() {
 		this.utils = new Utils();
 		final CustomerDAO custDAO = new CustomerDAO();
 		this.customers = new CustomerController(custDAO, utils);
+		final ItemDAO itemDAO = new ItemDAO();
+		this.items = new ItemController(itemDAO, utils);
+		final OrderLineItemDAO lineItemDAO = new OrderLineItemDAO();
+		final OrderDAO ordDAO = new OrderDAO();
+		this.orders = new OrderController(ordDAO, custDAO, itemDAO, lineItemDAO, utils);
 	}
 
 	public void imsSystem() {
@@ -50,8 +63,10 @@ public class IMS {
 				active = this.customers;
 				break;
 			case ITEM:
+				active = this.items;
 				break;
 			case ORDER:
+				active = this.orders;
 				break;
 			case STOP:
 				return;
@@ -66,10 +81,38 @@ public class IMS {
 
 			if (action == Action.RETURN) {
 				changeDomain = true;
+			} else if(action == Action.UPDATE && domain == Domain.ORDER) {
+				selectOrderAction();
+				
 			} else {
 				doAction(active, action);
 			}
 		} while (!changeDomain);
+	}
+	
+	private void selectOrderAction() {
+		CrudController<?> active = this.orders;
+		LOGGER.info("How would you like to update the Order");
+		
+		OrderAction.printOrderActions();
+		OrderAction action = OrderAction.getAction(utils);
+		
+		switch (action) {
+		case UPDATE:
+			doAction(active, Action.UPDATE);
+			break;
+		case ADD:
+			this.orders.addItem();
+			break;
+		case REMOVE:
+			this.orders.removeItem();
+			break;
+		case RETURN:
+			break;
+		default:
+			break;
+		}
+	
 	}
 
 	public void doAction(CrudController<?> crudController, Action action) {

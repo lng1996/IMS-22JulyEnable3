@@ -1,4 +1,4 @@
-Coverage: 34%
+Coverage: 60%
 # CLI Inventory Management System
 
  The CLI Inventory Management System (IMS) is used as a friendly interface for personal and enterpise applications in managing customers, their orders and the logistics of those orders. The functionality of the system allows users to create, read, update, and delete (CRUD) customers, orders and associated items. 
@@ -7,7 +7,22 @@ Coverage: 34%
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+## Project Planning and Management
+
+### Jira
+
+Jira was used for project planning and time management. The Jira site can be accessed [here](https://leogornovskiy.atlassian.net/jira/software/projects/IMS/boards/3) and a sample is shown ![below:](Jira.png)
+
+The project was completed in two sprints with user stories describing the functionality of individual issues in the backlog. The issues also employed story points and MoSCoW methodology to order and prioritise tasks.
+
+### Database Schema
+
+The schema for the database can be readily demonstrated with an ERD diagram. This diagram served as the basis for the development of the database for the application. ![SQL Schema](SQLSchema.png)
+
+
 ## Prerequisites
+
+
 
 #### Visual Studio Code
 Visual Studio (VS) Code is a Microsoft source-code editing app and was used in the creation and editing of this project. It can be downloaded at the official [Microsoft site](https://code.visualstudio.com/download).
@@ -43,52 +58,84 @@ git config --global user.email "email@email.com"
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+This is a brief guide to ensure the application works as intended. 
 
-Say what the step will be
+- Java Development Kit 18 needs to be downloaded and installed. 
+- Ensure that environment variables are correctly setup with %JAVA_HOME%/bin appended to path.
+- Download and install Visual Studio Code.
+- Add Maven to the IDE and add %MAVEN_HOME%/bin to path.
+- Setup MySQL Workbench.
+- Download GitBash and create a GitHub account if you do not already have one.
 
-```
-Give the example
-```
+Once all prerequisite apps are installed, the repo can be cloned using GitBash or Terminal (Mac). Then the db.properties file needs to be updated to ensure it connects to your MySQL Workbench server.
 
-And repeat
+### Using the Inventory Management System
+The IMS gives the user the ability to manipulate Customers, Orders and Items, which have unique attributes and relationships as per the database schema shown earlier.
 
-```
-until finished
-```
+The attributes for each of the entities are as follows:
 
-End with an example of getting some data out of the system or using it for a little demo
+#### Customers
+- First Name
+- Surname
+- Customer ID
+
+#### Orders
+- Customer ID
+- Order Number
+- Order Total
+
+#### Items
+- Item ID
+- Name 
+- Price 
+- Stock
+
+These attributes can be viewed and amended with the Create, Read, Update and Delete (CRUD )functionality of the IMS. 
+
+As CRUD fucntionality is similar between the entities, it is demonstrated for Customer here. The other entities will have differing attributes based on the above lists, but are otherwise identical in editing or viewing. 
+
+*Customer* 
+
+- Create - Prompts the user to enter name, then surname and adds the new customer to the database. 
+- Read - Displays all customers in the database
+- Update - Prompts user to enter customer ID then asks for new name and surname to be updated in the database. 
+- Delete  - Prompts user to enter a customer ID and then deletes the customer from the database. 
+
+An example of the application running is shown here:
+
+![AppRun](AppRun.png)
+
+### Packaging the IMS to run via CLI.
+
+The IMS can be packaged into a *.jar* file to be easily executable from the command line as shown hence:   
+
+
 
 ## Running the tests
 
-Explain how to run the automated tests for this system. Break down into which tests and what they do
+Tests need to be run to ensure the IMS functions as intended and to give an opportunity for any unanticipated bugs to be ironed out. The tests are run each of the objects in the IMS, which include: **Customer, Item, Order, CustomerDAO, ItemDAO, OrderDAO, CustomerController, ItemController and OrderController.**
 
 ### Unit Tests 
 
-Explain what these tests test, why and how to run them
+Unit tests are run using tools like JUnit for the evaulation of isolated module functioning. This means it tests the smallest pieces of code such as methods independent of any dependencies. 
 
-```
-Give an example
-```
 
 ### Integration Tests 
-Explain what these tests test, why and how to run them
+After unit testing is complete, integration testing is run to evaluate how a system works as a whole and to see if any issues emerge from the interaction of co-dependent code. This is especially important when an application is written programmers who may emply varying coding methods. 
 
-```
-Give an example
-```
+An example of a test being successfully run is shown hence: 
 
-### And coding style tests
+![Test](Test.png)
 
-Explain what these tests test and why
+### Other Forms of Testing
 
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+Other tests can be performed on systems, which include:
+- Functional tests
+- Acceptance tests
+- End-to-End 
+- Smoke testing
+- Performance testing 
+- Functional tests
 
 ## Built With
 
@@ -96,7 +143,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning.
+[GitHub](http://github.com/) was used for versioning.
 
 ## Authors
 
@@ -111,8 +158,5 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-# IMS-Start
-# IMS-Start
+* QA Academy and Trainers (Jordan Benbelaid, Anoush Lowton, Christopher Yiangou)
+
